@@ -1,0 +1,36 @@
+@mixin flex-center-social-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(217, 217, 217, 0.1);
+  display: inline-flex;
+  border-radius: 50%;
+  margin-right: 6px;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+@mixin state-before {
+  content: "";
+  position: absolute;
+  background-color: #ffffff;
+  transition: 0.3s ease-in-out;
+}
+
+@mixin background-center {
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@mixin form-border {
+  border-radius: 20px;
+  color: #fff;
+  margin: 0 0 8px 0;
+  padding: 18px 26px;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  transition: 0.3s ease-in-out;
+}
