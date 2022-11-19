@@ -23,7 +23,6 @@ body {
   font-family: $fonts;
 }
 
-// ???
 h1,
 h2,
 h3,
@@ -67,16 +66,18 @@ button {
 
 /************ Navbar ************/
 .navbar {
-  padding: 18px 0;
+  padding: 0 0;
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 20px;
   z-index: 9999;
   transition: 0.32s ease-in-out;
-  .scrolled {
-    padding: 0px 0;
-    background-color: $primary-color;
-  }
+  @include background-center;
+}
+
+.scrolled {
+  padding: 0px 0;
+  background-color: $primary-color;
 }
 
 span {
@@ -88,6 +89,7 @@ span {
     display: inline-block;
     margin-left: 14px;
     a {
+      color: white !important;
       @include flex-center-social-icon;
       &:before {
         width: 42px;
@@ -109,6 +111,7 @@ span {
           filter: brightness(0) saturate(100%) invert(0%) sepia(7%)
             saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
         }
+        color: #000;
       }
     }
   }
@@ -154,8 +157,8 @@ span {
 /************ Banner ************/
 .banner {
   margin-top: 0;
-  padding: 260px 0 100px 0;
-  background-image: url("./assets/img/banner-galaxy-bg-3.jpg");
+  padding: 200px 0 320px 0;
+  background-image: url("./assets/img/banner-camaro.jpg");
   @include background-center;
   .tagline {
     font-weight: 700;
@@ -178,9 +181,8 @@ span {
     line-height: 1;
     margin-bottom: 20px;
     display: block;
-  }
-  img {
-    animation: letgo 3s linear infinite;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
   }
 }
 
@@ -216,10 +218,11 @@ span {
 /************ Contact Form ************/
 .contact {
   // background: linear-gradient(90.21deg, #aa367c -5.91%, #4a2fbd 111.58%);
-  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0c2b4cc2-d07d-4fbd-b02e-2080981b29a1/db87204-1cfbe4e4-c8be-44d5-99af-e21757dcfeb3.jpg/v1/fill/w_1280,h_720,q_75,strp/time_stops_by_t1na_db87204-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvMGMyYjRjYzItZDA3ZC00ZmJkLWIwMmUtMjA4MDk4MWIyOWExXC9kYjg3MjA0LTFjZmJlNGU0LWM4YmUtNDRkNS05OWFmLWUyMTc1N2RjZmViMy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.wyd9FfkoN5w5232J1tcxIglKPLZbnfGXTNOjcxjHQ84");
-  padding: 10px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  @include form-border;
+  background-image: url("./assets/img/banner-news.jpg");
+  padding: 30px 60px;
+  margin: top 20px;
+  // border: 1px solid rgba(255, 255, 255, 0.5);
+  // @include form-border;
   @include background-center;
   h2 {
     font-size: 45px;
@@ -231,7 +234,7 @@ span {
     textarea {
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      // border: 1px solid rgba(255, 255, 255, 0.5);
       @include form-border;
       &:focus {
         background: rgba(255, 255, 255, 1);
@@ -244,49 +247,315 @@ span {
       }
     }
     button {
-      font-weight: 700;
-      color: #000;
-      background-color: $primary-color-text;
-      padding: 14px 48px;
-      font-size: 18px;
-      margin-top: 25px;
-      border-radius: 0;
-      position: relative;
-      transition: 0.3s ease-in-out;
-      span {
-        z-index: 1;
-        position: relative;
+      @include button-style-white-to-black;
+    }
+  }
+}
+
+/************ VideoCard ************/
+
+.videoCard {
+  width: 100%;
+  display: flex;
+  video {
+    width: 100%;
+    object-fit: cover;
+  }
+  .content {
+    position: absolute;
+    width: 100%;
+    top: 180vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+  }
+}
+
+/************ News ************/
+.news {
+  padding: 30px;
+  background-color: #fff;
+  color: $primary-color;
+  .container_news {
+    .grid_container_news {
+      .h5_news {
+        @include font-heading;
       }
-      &:hover {
-        color: $primary-color-text;
+      .grid_h1_news {
+        .h1_news {
+          @include font-heading;
+          font-size: 80px;
+          margin-bottom: 30px;
+        }
       }
-      &:before {
-        content: "";
-        background: $primary-color;
-        width: 0;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        transition: 0.3s ease-in-out;
+      .grid_img {
+        padding-bottom: 30px;
       }
-      &:hover::before {
-        width: 100%;
+      .grid_list_news {
+        padding: 30px 0;
+        .component_news {
+          .component_content_news {
+            padding: 0 20px;
+            .date_news {
+              padding-bottom: 20px;
+            }
+            .title_news {
+              font-weight: 600;
+            }
+            button {
+              .link_button {
+                @include button-style-white-to-black;
+              }
+            }
+          }
+        }
+      }
+      .grid_button {
+        display: flex;
+        justify-content: center;
+        button {
+          .link_button {
+            @include button-style-black-to-white;
+          }
+        }
       }
     }
   }
 }
 
-/************ Skills ************/
-.skills {
-  padding: 30px;
-  text-align: center;
+/************ News Detail ************/
+.news_detail {
+  padding: 50px 120px;
+  background-color: rgb(255, 255, 255);
+  color: $primary-color;
+  .container_news {
+    .grid_container_news {
+      .h5_news {
+        @include font-heading;
+      }
+      .grid_h1_news {
+        .h1_news {
+          @include font-heading;
+          font-size: 73px;
+        }
+      }
+      .grid_img {
+        padding-bottom: 30px;
+      }
+      .grid_list_news {
+        padding: 30px 0;
+        .component_news {
+          .component_content_news {
+            padding: 0 20px;
+
+            .date_news {
+              padding-bottom: 20px;
+            }
+            .title_news {
+              font-weight: 600;
+            }
+            button {
+              .link_button {
+                @include button-style-white-to-black;
+              }
+            }
+          }
+        }
+      }
+      .grid_button {
+        display: flex;
+        justify-content: center;
+        button {
+          @include button-style-black-to-white;
+        }
+      }
+    }
+  }
 }
+
+/************ Banner News Detail ************/
+
+.banner_news_detail {
+  margin-top: 0;
+  padding: 150px 0 120px 0;
+  background-image: url("./assets/img/banner_news_detail.jpg");
+  @include background-center;
+  .tagline {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(
+      90.21deg,
+      rgba(170, 54, 124, 0.5) -5.91%,
+      rgba(74, 47, 189, 0.5) 111.58%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+
+/************ Banner Adding Page ************/
+.banner_adding {
+  margin-top: 0;
+  padding: 150px 0 280px 0;
+  background-image: url("./assets/img/banner-add-page.jpg");
+  @include background-center;
+  .tagline {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(
+      90.21deg,
+      rgba(170, 54, 124, 0.5) -5.91%,
+      rgba(74, 47, 189, 0.5) 111.58%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+
+/************ Banner News List ************/
+.banner_news_list {
+  margin-top: 0;
+  padding: 120px 0 260px 0;
+  background-image: url("./assets/img/banner-news-list.jpg");
+  @include background-center;
+  .tagline {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(
+      90.21deg,
+      rgba(170, 54, 124, 0.5) -5.91%,
+      rgba(74, 47, 189, 0.5) 111.58%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+
+/************ News Presentations ************/
+.news_presentation {
+  padding: 50px 120px;
+  background-color: rgb(255, 255, 255);
+  color: $primary-color;
+  .container_news {
+    .grid_container_news {
+      .h5_news {
+        @include font-heading;
+      }
+      .grid_h1_news {
+        .h1_news {
+          @include font-heading;
+          font-size: 73px;
+        }
+      }
+      .grid_img {
+        padding-bottom: 30px;
+      }
+      .grid_list_news {
+        padding: 30px 0;
+        .component_news {
+          .component_content_news {
+            padding: 0 20px;
+            .date_news {
+              padding-bottom: 20px;
+            }
+            .title_news {
+              font-weight: 600;
+            }
+            button {
+              .link_button {
+                @include button-style-white-to-black;
+              }
+            }
+          }
+        }
+      }
+      .grid_button {
+        display: flex;
+        justify-content: center;
+        button {
+          @include button-style-black-to-white;
+        }
+      }
+    }
+  }
+}
+
+/************ Banner Update ************/
+.banner_update {
+  margin-top: 0;
+  padding: 120px 0 260px 0;
+  background-image: url("./assets/img/banner-update.jpg");
+  @include background-center;
+  .tagline {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(
+      90.21deg,
+      rgba(170, 54, 124, 0.5) -5.91%,
+      rgba(74, 47, 189, 0.5) 111.58%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+
 /************ Footer ************/
 .footer {
   padding: 50px 0 50px 0;
-  background-image: url("./assets/img/footer-bg.png");
+  // background-image: url("./assets/img/footer-bg.png");
   @include background-center;
   img {
     width: 26%;

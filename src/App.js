@@ -1,25 +1,28 @@
-import './App.scss';
-import Banner from './Banner';
-import Footer from './Footer';
-import Main from './Main';
-import Navigation from './Navigation';
 import { Route, Routes } from "react-router-dom";
-import Contact from './Contact';
-import Skills from './Skills';
-import AboutMe from './AboutMe';
+import Add from "./Add";
+import './App.scss';
+import Dashboard from "./Dashboard";
+import Footer from './Footer';
+import Login from "./Login";
+import News from "./News";
+import NewsDetail from "./NewsDetail";
+import NewsPresentation from "./NewsPresentation";
+import Protected from "./Protected";
+import Update from "./Update";
 
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Banner />
+      {/* <Navigation /> */}
       <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path='/contact' element={<Contact />}></Route>
-        <Route path='/about me' element={<AboutMe />}></Route>
-        {/* <Route path='/news' element={<News />}></Route> */}
-        <Route path='/skills' element={<Skills />}></Route>
+        <Route path="/" element={<News />}></Route>
+        <Route path='/news_detail/:id' element={<NewsDetail />}></Route>
+        <Route path='/news_presentation' element={<NewsPresentation />}></Route>
+        <Route path='/news_add' element={<Protected><Add /></Protected>}></Route>
+        <Route path='/dashboard' element={<Protected><Dashboard /></Protected>}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/update/:id' element={<Protected><Update /></Protected>}></Route>
       </Routes>
       <Footer />
     </div>

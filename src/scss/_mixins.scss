@@ -34,3 +34,82 @@
   letter-spacing: 0.8px;
   transition: 0.3s ease-in-out;
 }
+
+@mixin font-heading {
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-bottom: 20px;
+  display: block;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+@mixin button-style-white-to-black {
+  font-weight: 700;
+  color: #000;
+  background-color: $primary-color-text;
+  padding: 14px 48px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: 1px solid;
+  border-radius: 0;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  span {
+    z-index: 1;
+    position: relative;
+  }
+  &:hover {
+    color: $primary-color-text;
+  }
+  &:before {
+    content: "";
+    background: $primary-color;
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: 0.3s ease-in-out;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+@mixin button-style-black-to-white {
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  background-color: $primary-color;
+  padding: 14px 48px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: 1px solid;
+  border-radius: 0;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  span {
+    z-index: 1;
+    position: relative;
+  }
+  &:hover {
+    color: rgb(0, 0, 0);
+  }
+  &:before {
+    content: "";
+    // background: $primary-color;
+    background: #fff;
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: 0.3s ease-in-out;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+}

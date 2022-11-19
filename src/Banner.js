@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
-import headerImg from './assets/img/astrounaut-header.png';
 
 export default function Banner() {
     const [loopNum, setLoopNum] = useState(0);
@@ -46,12 +45,11 @@ export default function Banner() {
             <Container>
                 <Grid container spacing={1}>
                     <Grid xs={12} md={7}>
-                        <span className="tagline">Welcome to my portfolio</span>
-                        <h1>{`Hi i'm `}<span className="wrap">{text}</span></h1>
+                        <h1>TAKE ALL YOUR SOULS TO DRIVE</h1>
                         <p></p>
                     </Grid>
                     <Grid xs={12} md={5}>
-                        <img src={headerImg} alt="Header Img" />
+
                     </Grid>
                 </Grid>
             </Container>

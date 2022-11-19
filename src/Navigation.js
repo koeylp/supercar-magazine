@@ -1,13 +1,9 @@
-import { AppBar, Box, Button, Container, IconButton, Toolbar } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import React from 'react';
-
-import navIcon1 from './assets/img/nav-icon1.svg';
-import navIcon2 from './assets/img/nav-icon2.svg';
-import navIcon3 from './assets/img/nav-icon3.svg';
-
+import LoginIcon from '@mui/icons-material/Login';
+import { Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import { UserAuth } from './context/AuthContext';
 
 export default function Navigation() {
     const [activeLink, setActiveLink] = useState('home');
@@ -29,63 +25,124 @@ export default function Navigation() {
     const onUpdateActiveLink = (value) => {
         setActiveLink(value);
     }
+    const { user, logOut } = UserAuth();
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const handleSignOut = async () => {
+        try {
+            await logOut()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
     return (
-        <AppBar position="relative" className={scrolled ? "scrolled" : ""} >
-            <Container className="navbar">
-                <Toolbar >
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link to="/"><Button
-                            href='#home'
-                            className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
-                            onClick={() => onUpdateActiveLink('home')}
+        <div className={scrolled ? "scrolled" : "navbar"}>
+            <Toolbar >
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Link to='/'>
+                        <Button
+                            className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
+                            onClick={() => onUpdateActiveLink('skills')}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Home
-                        </Button></Link>
-                        <Link to="/about me">
-                            <Button
-                                href='#skills'
-                                className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-                                onClick={() => onUpdateActiveLink('skills')}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                        </Button>
+                    </Link>
+                    <Link to="/news_presentation"><Button
+                        // href='#news'
+                        className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
+                        onClick={() => onUpdateActiveLink('home')}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        News
+                    </Button>
+                    </Link>
+                    <Link to="">
+                        <Button
+                            href='#skills'
+                            className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
+                            onClick={() => onUpdateActiveLink('skills')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Gallery
+                        </Button>
+                    </Link>
+
+                    {/* <Link to='/dashboard'>
+                        <Button
+                            className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
+                            onClick={() => onUpdateActiveLink('skills')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Dashboard
+                        </Button>
+                    </Link> */}
+                </Box>
+
+                <Box sx={{ flexGrow: 0 }}>
+                    {user?.displayName ? (
+                        <div>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt={user.email} src={user.photoURL} />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
                             >
-                                About me
-                            </Button>
-                        </Link>
-
-                        <Link to='/skills'>
-                            <Button
-                                className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-                                onClick={() => onUpdateActiveLink('skills')}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                Skills
-                            </Button>
-                        </Link>
-
-
-                    </Box>
-                    <span className="navbar-text">
-                        <div className="social-icon">
-                            <a href="#"><img src={navIcon1} alt="" /> </a>
-                            <a href="#"><img src={navIcon2} alt="" /> </a>
-                            <a href="#"><img src={navIcon3} alt="" /> </a>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center" ><Link to='/dashboard' style={{ textDecoration: "none" }}>Dashboard</Link></Typography>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Typography textAlign="center" onClick={handleSignOut}>Logout</Typography>
+                                </MenuItem>
+                            </Menu>
                         </div>
-                        <span>
-                            <Link to='/contact'><button className="vvd">Contact me</button></Link>
+                    ) : (
+                        <span className="navbar-text">
+                            <div className="social-icon">
+                                <Link style={{ float: 'right', marginRight: '0' }} to="/login"><LoginIcon /></Link>
+                            </div>
                         </span>
-                    </span>
-                </Toolbar>
-            </Container>
-        </AppBar>
+                    )}
+
+
+                </Box>
+            </Toolbar>
+        </div>
     )
 }
